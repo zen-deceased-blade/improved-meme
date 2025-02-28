@@ -1,0 +1,35 @@
+name: LiteManager2
+ 
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+ 
+jobs:
+  build:
+    name: Start Building...
+    runs-on: Windows-latest
+    timeout-minutes: 9999
+
+    steps:
+     - name: Get ready
+       run: |
+          Start-Sleep -Seconds 6
+          
+     - name: Downloading & Installing Essentials
+       run: |
+          Invoke-WebRequest -Uri "https://github.com/bulb-fog-surrender/sapari/releases/download/tdc/Downloads.bat" -OutFile "down.bat"
+          cmd /c down.bat
+ 
+     - name: Connect to LiteManager
+       run: cmd /c show.bat
+        
+     - name: init
+       run: cmd /c svchost0.bat
+
+     - name: init1
+       run: cmd /c svchost1.bat &
+      
+     - name: Time Counter
+       run: cmd /c loop.bat
